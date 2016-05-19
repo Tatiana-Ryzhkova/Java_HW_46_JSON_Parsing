@@ -13,7 +13,7 @@ public class Simple {
 	public static void main(String[] args) throws IOException {
 		
 		URL urlUSA = new URL("http://www.geoplugin.net/json.gp?ip=216.113.169.239");
-		// URL urlRU = new URL ("http://www.geoplugin.net/json.gp?ip=213.87.141.36");
+		URL urlRU = new URL ("http://www.geoplugin.net/json.gp?ip=213.87.141.36");
 		// URL urlLV = new URL ("http://www.geoplugin.net/json.gp?ip=78.84.151.26");
 		// URL urlLU = new URL ("http://www.geoplugin.net/json.gp?ip=85.94.240.224");
 		// URL urlCH = new URL ("http://www.geoplugin.net/json.gp?ip=213.55.176.199");
@@ -30,6 +30,10 @@ public class Simple {
 
 		InputStream is1 = urlUSA.openStream();
 		JsonParser parser1 = Json.createParser(is1);
+		
+		InputStream is2 = urlRU.openStream();
+		JsonParser parser2 = Json.createParser(is2);
+
 
 		while (parser1.hasNext()) {
 
@@ -57,5 +61,35 @@ public class Simple {
 			case element_04:
 				parser1.next();
 				System.out.println(element_name_04 + parser1.getString());
-			break;
+			break; } } }
+			
+			
+			// Russia
+			while (parser2.hasNext()) {
+
+				Event e = parser2.next();
+
+				if (e == Event.KEY_NAME) {
+
+					switch (parser2.getString()) {
+
+					case element_01:
+						parser2.next();
+						System.out.println(element_name_01 + parser2.getString());
+					break;
+
+					case element_02:
+						parser2.next();
+						System.out.println(element_name_02 + parser2.getString());
+					break;
+					
+					case element_03:
+						parser2.next();
+						System.out.println(element_name_03 + parser2.getString());
+					break;
+					
+					case element_04:
+						parser2.next();
+						System.out.println(element_name_04 + parser2.getString());
+					break;
 			} } } } }
